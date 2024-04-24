@@ -1,6 +1,6 @@
 import { CurrentConfig } from '../config'
 
-const CHAIN_IDS = {
+export const CHAIN_IDS = {
   'mainnet': 1,
   'polygon': 137,
   'optimism': 10,
