@@ -21,7 +21,7 @@ type ChainInfo = {
   nativeCurrency: {
     name: string
     symbol: string
-    decimals: number
+    decimals: 18
   }
   rpcUrl: string
 }
