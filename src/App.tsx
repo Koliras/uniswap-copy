@@ -1,8 +1,8 @@
 import './App.css'
 import { ConnectionOptions } from './lib/components/ConnectionOptions'
 import { useWeb3React } from '@web3-react/core'
-import { SwitchChains } from './lib/components/SwitchChains'
 import { useConnectionStore } from './lib/stores/connectionStore'
+import { SwitchChains } from './lib/components/SwitchChains'
 
 function App() {
   const { chainId, account, isActive } = useWeb3React()
