@@ -24,14 +24,14 @@ export function onConnectionError(error: Error) {
   console.debug(`web3-react error: ${error}`)
 }
 
-export const PRIORITIZED_CONNECTORS: { [key in ConnectionType]: Connection } = {
+export const CONNECTORS: { [key in ConnectionType]: Connection } = {
   [ConnectionType.INJECTED]: buildInjectedConnector(),
   [ConnectionType.WALLET_CONNECT]: buildWalletConnectConnector(),
 }
 
 export function getConnection(c: Connector | ConnectionType) {
   if (c instanceof Connector) {
-    const connection = Object.values(PRIORITIZED_CONNECTORS).find((connection) => connection.connector === c)
+    const connection = Object.values(CONNECTORS).find((connection) => connection.connector === c)
     if (!connection) {
       throw Error('Unsupported Connector')
     }
@@ -39,9 +39,9 @@ export function getConnection(c: Connector | ConnectionType) {
   } else {
     switch (c) {
       case ConnectionType.INJECTED:
-        return PRIORITIZED_CONNECTORS[ConnectionType.INJECTED]
+        return CONNECTORS[ConnectionType.INJECTED]
       case ConnectionType.WALLET_CONNECT:
-        return PRIORITIZED_CONNECTORS[ConnectionType.WALLET_CONNECT]
+        return CONNECTORS[ConnectionType.WALLET_CONNECT]
     }
   }
 }

@@ -1,18 +1,9 @@
 import { CurrentConfig } from '../config'
 
-export const CHAIN_IDS = {
-  'mainnet': 1,
-  'polygon': 137,
-  'optimism': 10,
-}
-
-export let INPUT_CHAIN_ID = CHAIN_IDS[CurrentConfig.chain]
-export const INPUT_CHAIN_URL = CurrentConfig.rpc[CurrentConfig.chain]
-
-export const CHAIN_TO_URL_MAP = {
-  [CHAIN_IDS.polygon]: CurrentConfig.rpc.polygon,
-  [CHAIN_IDS.mainnet]: CurrentConfig.rpc.mainnet,
-  [CHAIN_IDS.optimism]: CurrentConfig.rpc.optimism,
+export enum CHAIN_IDS {
+  mainnet = 1,
+  polygon = 137,
+  optimism = 10,
 }
 
 type ChainInfo = {
