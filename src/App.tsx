@@ -1,29 +1,23 @@
 import './App.css'
-import { Connector } from '@web3-react/types'
-import { ConnectionType, getConnection } from './lib/connections'
-
-async function connect(connector: Connector) {
-  try {
-    await connector.activate()
-  } catch (error) {
-    console.debug(`web3-react eager connection error: ${error}`)
-  }
-}
+import { ConnectionType } from './lib/connections'
+import { ConnectionOptions } from './lib/components/ConnectionOptions'
+import { useState } from 'react'
+import { useWeb3React } from '@web3-react/core'
 
 function App() {
+  const { chainId, account, isActive } = useWeb3React()
+  const [connectionType, setConnectionType] = useState<ConnectionType | null>(null)
   return (
     <div>
-      text
-      <button
-        onClick={() => connect(getConnection(ConnectionType.INJECTED).connector)}
-      >
-        Connect Metamask
-      </button>
-      <button
-        onClick={() => connect(getConnection(ConnectionType.WALLET_CONNECT).connector)}
-      >
-        Connect WalletConnect
-      </button>
+      <ConnectionOptions
+        activeConnectionType={connectionType}
+        isConnectionActive={isActive}
+        onActivate={setConnectionType}
+        onDeactivate={setConnectionType}
+      />
+      <h2>Chaind ID is {chainId}</h2>
+      <h2>Account is {account}</h2>
+      <h2>Connection type is {connectionType}</h2>
     </div>
   )
 }
