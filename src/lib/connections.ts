@@ -46,6 +46,30 @@ export function getConnection(c: Connector | ConnectionType) {
   }
 }
 
+export const switchNetwork = async (chainId: ChainId, connectionType: ConnectionType | null) => {
+  if (!connectionType) {
+    return
+  }
+
+  const { connector } = getConnection(connectionType)
+
+  if (connectionType === ConnectionType.WALLET_CONNECT) {
+    await connector.activate(chainId)
+    return
+  }
+
+  const chainInfo = CHAIN_INFO[chainId]
+  const addChainParameter: AddEthereumChainParameter = {
+    chainId,
+    chainName: chainInfo.label,
+    rpcUrls: [chainInfo.rpcUrl],
+    nativeCurrency: chainInfo.nativeCurrency,
+    blockExplorerUrls: [chainInfo.explorer],
+  }
+  await connector.activate(addChainParameter)
+}
+
+
 export const tryActivateConnector = async (connector: Connector): Promise<ConnectionType | undefined> => {
   await connector.activate()
   const connectionType = getConnection(connector).type
