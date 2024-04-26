@@ -5,12 +5,17 @@ import { Connection, ConnectionType } from './connections'
 import { CHAIN_IDS } from './constants'
 
 export function buildWalletConnectConnector() {
+  const projectId: string = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
+  if (!projectId.length) {
+    throw new Error("No wallet connect project id. Please, fix the .env")
+  }
+
   const [walletConnect, walletHooks] = initializeConnector<WalletConnect>(
     actions =>
       new WalletConnect({
         actions,
         options: {
-          projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
+          projectId: projectId,
           chains: [CHAIN_IDS.mainnet],
           optionalChains: [CHAIN_IDS.polygon, CHAIN_IDS.optimism],
           showQrModal: true,
