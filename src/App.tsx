@@ -1,13 +1,12 @@
 import './App.css'
-import { ConnectionType } from './lib/connections'
 import { ConnectionOptions } from './lib/components/ConnectionOptions'
-import { useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { SwitchChains } from './lib/components/SwitchChains'
+import { useConnectionStore } from './lib/stores/connectionStore'
 
 function App() {
   const { chainId, account, isActive } = useWeb3React()
-  const [connectionType, setConnectionType] = useState<ConnectionType | null>(null)
+  const { setConnectionType, connectionType } = useConnectionStore(state => state)
   return (
     <div>
       <ConnectionOptions
