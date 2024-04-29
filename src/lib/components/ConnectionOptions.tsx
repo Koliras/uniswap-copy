@@ -1,4 +1,4 @@
-import { ConnectionType, getHasMetaMaskExtensionInstalled } from '../connections'
+import { ConnectionType, getConnection, getHasMetaMaskExtensionInstalled, tryDeactivateConnector } from '../connections'
 import { METAMASK_URL } from '../constants'
 import { Option } from './Option'
 
@@ -21,11 +21,9 @@ export const ConnectionOptions = ({
 
 	const metaMaskOption = hasMetaMaskExtension ? (
 		<Option
-			isEnabled={isNoOptionActive || activeConnectionType === ConnectionType.INJECTED}
-			isConnected={activeConnectionType === ConnectionType.INJECTED}
+			activeConnectionType={activeConnectionType}
 			connectionType={ConnectionType.INJECTED}
 			onActivate={onActivate}
-			onDeactivate={onDeactivate}
 		/>
 	) : (
 		<a href={METAMASK_URL}>
@@ -35,18 +33,37 @@ export const ConnectionOptions = ({
 
 	const walletConnectOption = (
 		<Option
-			isEnabled={isNoOptionActive || activeConnectionType === ConnectionType.WALLET_CONNECT}
-			isConnected={activeConnectionType === ConnectionType.WALLET_CONNECT}
+			activeConnectionType={activeConnectionType}
 			connectionType={ConnectionType.WALLET_CONNECT}
 			onActivate={onActivate}
-			onDeactivate={onDeactivate}
 		/>
+	)
+
+	const handleDeactivate = async () => {
+		if (activeConnectionType !== null) {
+			const deactivation = await tryDeactivateConnector(getConnection(activeConnectionType).connector)
+			if (deactivation === undefined) {
+				return
+			}
+			onDeactivate(deactivation)
+			return
+		}
+
+	}
+
+	const disconnectButton = (
+		<div>
+			<button onClick={handleDeactivate} disabled={isNoOptionActive}>
+				Disconnect
+			</button>
+		</div>
 	)
 
 	return (
 		<div>
 			{metaMaskOption}
 			{walletConnectOption}
+			{disconnectButton}
 		</div>
 	)
 }
