@@ -1,5 +1,3 @@
-import { CurrentConfig } from '../config'
-
 export enum CHAIN_IDS {
   mainnet = 1,
   polygon = 137,
@@ -22,19 +20,19 @@ export const CHAIN_INFO: { [key: string]: ChainInfo } = {
     explorer: 'https://etherscan.io/',
     label: 'Ethereum',
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-    rpcUrl: CurrentConfig.rpc.mainnet,
+    rpcUrl: 'https://api.mycryptoapi.com/eth',
   },
   [CHAIN_IDS.polygon]: {
     explorer: 'https://polygonscan.com/',
     label: 'Polygon',
     nativeCurrency: { name: 'Polygon Matic', symbol: 'MATIC', decimals: 18 },
-    rpcUrl: CurrentConfig.rpc.polygon,
+    rpcUrl: 'https://polygon-rpc.com/',
   },
   [CHAIN_IDS.optimism]: {
     explorer: 'https://explorer.optimism.io',
     label: 'Optimism',
     nativeCurrency: { name: 'Optimism', symbol: 'OP', decimals: 18 },
-    rpcUrl: CurrentConfig.rpc.optimism,
+    rpcUrl: 'https://mainnet.optimism.io/',
   },
 }
 
