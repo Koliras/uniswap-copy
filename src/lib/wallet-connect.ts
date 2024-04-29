@@ -5,8 +5,8 @@ import { Connection, ConnectionType } from './connections'
 import { ChainId } from './constants'
 
 export function buildWalletConnectConnector() {
-  const projectId: string = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
-  if (!projectId.length) {
+  const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
+  if (!projectId?.length) {
     throw new Error("No wallet connect project id. Please, fix the .env")
   }
 
