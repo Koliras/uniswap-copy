@@ -1,23 +1,32 @@
-import React from "react"
 import { useWeb3React } from "@web3-react/core"
 import { useTokens } from "../hooks/useTokens"
+import { ChainId } from "../constants"
+import { Token } from "../../config"
 
-export const Tokens = () => {
+type Props = {
+	queryFilter: string
+	onTokenSelect: (t: Token | null) => void
+}
+
+export const Tokens = ({ queryFilter, onTokenSelect }: Props) => {
 	const { chainId } = useWeb3React()
 	const { data, isLoading } = useTokens()
 
-	if (isLoading) return <div>Loading</div>
+	if (isLoading || !data) return <div>Loading...</div>
 
 	return (
 		<div>
-			Some data
-			{chainId && data[chainId]?.map(token => (
-				<div key={token.address}>
-					<h2>
-						<img src={token.logoURI} />{token.name}: {token.chainId}
-					</h2>
-				</div>
-			))}
+			{chainId && data[chainId as ChainId]?.filter((token) => token.name.toLowerCase().includes(queryFilter.toLowerCase()))
+				.map(token => (
+					<button
+						key={token.address}
+						onClick={() => onTokenSelect(token)}
+					>
+						<h2>
+							<img src={token.logoURI} />{token.name}
+						</h2>
+					</button>
+				))}
 		</div>
 	)
 }
