@@ -1,7 +1,7 @@
 import { Web3ReactHooks } from '@web3-react/core'
 import { AddEthereumChainParameter, Connector } from '@web3-react/types'
 
-import { CHAIN_INFO } from './constants'
+import { ChainId, CHAIN_INFO } from './constants'
 import { buildInjectedConnector } from './injected'
 import { buildWalletConnectConnector } from './wallet-connect'
 
@@ -46,7 +46,7 @@ export function getConnection(c: Connector | ConnectionType) {
   }
 }
 
-export const switchNetwork = async (chainId: number, connectionType: ConnectionType | null) => {
+export const switchNetwork = async (chainId: ChainId, connectionType: ConnectionType | null) => {
   if (!connectionType) {
     return
   }

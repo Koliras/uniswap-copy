@@ -2,7 +2,7 @@ import { initializeConnector } from '@web3-react/core'
 import { WalletConnect } from '@web3-react/walletconnect-v2'
 
 import { Connection, ConnectionType } from './connections'
-import { CHAIN_IDS } from './constants'
+import { ChainId } from './constants'
 
 export function buildWalletConnectConnector() {
   const projectId: string = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
@@ -16,8 +16,8 @@ export function buildWalletConnectConnector() {
         actions,
         options: {
           projectId: projectId,
-          chains: [CHAIN_IDS.mainnet],
-          optionalChains: [CHAIN_IDS.polygon, CHAIN_IDS.optimism],
+          chains: [ChainId.mainnet],
+          optionalChains: [ChainId.polygon, ChainId.optimism],
           showQrModal: true,
           qrModalOptions: {
             themeVariables: {
