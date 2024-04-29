@@ -1,5 +1,5 @@
 import { Web3ReactProvider } from '@web3-react/core'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 import { CONNECTORS } from '../connections'
 
