@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { CHAIN_IDS } from '../constants'
-type TokensMap = Record<CHAIN_IDS, Token[]>;
+import { ChainId } from '../constants'
+type TokensMap = Record<ChainId, Token[]>;
 type Token = {
 	"address": string,
 	"name": string,
@@ -13,22 +13,22 @@ export function useTokens() {
 		queryKey: ["tokens"], queryFn: async () => {
 			const data = await fetch("https://ipfs.io/ipns/tokens.uniswap.org").then(res => res.json())
 			const tokens: TokensMap = {
-				[CHAIN_IDS.mainnet]: [],
-				[CHAIN_IDS.polygon]: [],
-				[CHAIN_IDS.optimism]: [],
+				[ChainId.mainnet]: [],
+				[ChainId.polygon]: [],
+				[ChainId.optimism]: [],
 			}
 			for (const token of data.tokens) {
 				switch (token.chainId) {
-					case CHAIN_IDS.mainnet: {
-						tokens[CHAIN_IDS.mainnet].push(token)
+					case ChainId.mainnet: {
+						tokens[ChainId.mainnet].push(token)
 						break
 					}
-					case CHAIN_IDS.optimism: {
-						tokens[CHAIN_IDS.optimism].push(token)
+					case ChainId.optimism: {
+						tokens[ChainId.optimism].push(token)
 						break
 					}
-					case CHAIN_IDS.polygon: {
-						tokens[CHAIN_IDS.polygon].push(token)
+					case ChainId.polygon: {
+						tokens[ChainId.polygon].push(token)
 						break
 					}
 				}
