@@ -1,4 +1,4 @@
-export enum CHAIN_IDS {
+export enum ChainId {
   mainnet = 1,
   polygon = 137,
   optimism = 10,
@@ -15,20 +15,20 @@ type ChainInfo = {
   rpcUrl: string
 }
 
-export const CHAIN_INFO: { [key: string]: ChainInfo } = {
-  [CHAIN_IDS.mainnet]: {
+export const CHAIN_INFO: Record<ChainId, ChainInfo> = {
+  [ChainId.mainnet]: {
     explorer: 'https://etherscan.io/',
     label: 'Ethereum',
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
     rpcUrl: 'https://api.mycryptoapi.com/eth',
   },
-  [CHAIN_IDS.polygon]: {
+  [ChainId.polygon]: {
     explorer: 'https://polygonscan.com/',
     label: 'Polygon',
     nativeCurrency: { name: 'Polygon Matic', symbol: 'MATIC', decimals: 18 },
     rpcUrl: 'https://polygon-rpc.com/',
   },
-  [CHAIN_IDS.optimism]: {
+  [ChainId.optimism]: {
     explorer: 'https://explorer.optimism.io',
     label: 'Optimism',
     nativeCurrency: { name: 'Optimism', symbol: 'OP', decimals: 18 },
