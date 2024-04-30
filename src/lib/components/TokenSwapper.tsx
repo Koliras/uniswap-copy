@@ -1,24 +1,22 @@
-import { useState } from "react"
 import { TokenChooser } from "./TokenChooser"
-import { Token } from "../constants"
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import Button from '@mui/material/Button'
+import { useTokensStore } from "../stores/tokensStore"
 
 export const TokenSwapper = () => {
-	const [tokenIn, setTokenIn] = useState<Token | null>(null)
-	const [tokenOut, setTokenOut] = useState<Token | null>(null)
+	const {
+		tokenIn,
+		setTokenIn,
+		tokenOut,
+		setTokenOut,
+		flipTokens,
+	} = useTokensStore(state => state);
 
-	const handleTokensFlip = () => {
-		const tIn = tokenIn
-		const tOut = tokenOut
-		setTokenOut(tIn)
-		setTokenIn(tOut)
-	}
 	return (
 		<div>
 			<Button
-				onClick={handleTokensFlip}
+				onClick={flipTokens}
 			>
 				Flip Tokens
 			</Button>
