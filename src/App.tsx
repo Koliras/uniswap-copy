@@ -5,13 +5,12 @@ import { useConnectionStore } from './lib/stores/connectionStore'
 import { SwitchChains } from './lib/components/SwitchChains'
 
 function App() {
-  const { chainId, account, isActive } = useWeb3React()
+  const { chainId, account } = useWeb3React()
   const { setConnectionType, connectionType } = useConnectionStore(state => state)
   return (
     <div>
       <ConnectionOptions
         activeConnectionType={connectionType}
-        isConnectionActive={isActive}
         onActivate={setConnectionType}
         onDeactivate={setConnectionType}
       />

@@ -13,7 +13,7 @@ export const SwitchChains = ({ connectionType }: Props) => {
 					onClick={() => switchNetwork(parseInt(chainId), connectionType)}
 					key={chainId}
 				>
-					Switch to ${chainInfo.label}
+					Switch to {chainInfo.label}
 				</button>
 			))}
 		</div>
