@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { TokenChooser } from "./TokenChooser"
-import { Token } from "../../config"
+import { Token } from "../constants"
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import Button from '@mui/material/Button'
 
-export const TokenSwaper = () => {
+export const TokenSwapper = () => {
 	const [tokenIn, setTokenIn] = useState<Token | null>(null)
 	const [tokenOut, setTokenOut] = useState<Token | null>(null)
 
