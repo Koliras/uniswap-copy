@@ -1,13 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { ChainId } from '../constants'
+import { ChainId, Token } from '../constants'
+
 type TokensMap = Record<ChainId, Token[]>;
-type Token = {
-	"address": string,
-	"name": string,
-	"symbol": string,
-	"decimals": number,
-	"logoURI": string,
-}
+
 export function useTokens() {
 	const tokensFromApi = useQuery({
 		queryKey: ["tokens"], queryFn: async () => {

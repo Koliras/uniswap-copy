@@ -4,11 +4,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { Tokens } from './Tokens';
-import { Token } from '../../config';
+import { Token } from '../constants';
 import { useWeb3React } from '@web3-react/core';
 
 const style = {
-	position: 'absolute' as 'absolute',
+	position: 'absolute' as const,
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
