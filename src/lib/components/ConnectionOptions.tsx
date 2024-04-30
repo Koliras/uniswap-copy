@@ -1,3 +1,4 @@
+import { useWeb3React } from '@web3-react/core'
 import { ConnectionType, getConnection, getHasMetaMaskExtensionInstalled, tryDeactivateConnector } from '../connections'
 import { METAMASK_URL } from '../constants'
 import { Option } from './Option'
@@ -15,9 +16,10 @@ export const ConnectionOptions = ({
 	onActivate,
 	onDeactivate,
 }: ConnectOptionsParams) => {
+	const { account } = useWeb3React()
 	const hasMetaMaskExtension = getHasMetaMaskExtensionInstalled()
 
-	const isNoOptionActive = !isConnectionActive || (isConnectionActive && activeConnectionType === null)
+	const isNoOptionActive = !account;
 
 	const metaMaskOption = hasMetaMaskExtension ? (
 		<Option
