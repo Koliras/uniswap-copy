@@ -1,7 +1,6 @@
 import { Web3ReactHooks } from '@web3-react/core'
-import { AddEthereumChainParameter, Connector } from '@web3-react/types'
+import { Connector } from '@web3-react/types'
 
-import { ChainId, CHAIN_INFO } from './constants'
 import { buildInjectedConnector } from './injected'
 import { buildWalletConnectConnector } from './wallet-connect'
 
