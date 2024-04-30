@@ -44,7 +44,7 @@ export const TokenChooser = ({ chosenToken, onTokenSelect }: Props) => {
 		if (!chainId) {
 			onTokenSelect(null)
 		}
-	}, [chainId])
+	}, [chainId, onTokenSelect])
 
 	return (
 		<div>
