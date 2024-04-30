@@ -1,7 +1,6 @@
 import { useWeb3React } from "@web3-react/core"
 import { useTokens } from "../hooks/useTokens"
-import { ChainId } from "../constants"
-import { Token } from "../../config"
+import { ChainId, Token } from "../constants"
 
 type Props = {
 	queryFilter: string
