@@ -1,34 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { ConnectionOptions } from './lib/components/ConnectionOptions'
+import { useWeb3React } from '@web3-react/core'
+import { useConnectionStore } from './lib/stores/connectionStore'
+import { SwitchChains } from './lib/components/SwitchChains'
+import { TokenSwapper } from './lib/components/TokenSwapper'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { chainId, account } = useWeb3React()
+  const { setConnectionType, connectionType } = useConnectionStore(state => state)
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <ConnectionOptions
+        activeConnectionType={connectionType}
+        onActivate={setConnectionType}
+        onDeactivate={setConnectionType}
+      />
+      <h2>Chaind ID is {chainId}</h2>
+      <h2>Account is {account}</h2>
+      <h2>Connection type is {connectionType}</h2>
+      <SwitchChains connectionType={connectionType} />
+      <TokenSwapper />
+    </div>
   )
 }
 
