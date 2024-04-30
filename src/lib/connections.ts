@@ -1,5 +1,5 @@
 import { Web3ReactHooks } from '@web3-react/core'
-import { AddEthereumChainParameter, Connector } from '@web3-react/types'
+import { Connector } from '@web3-react/types'
 
 import { ChainId, CHAIN_INFO } from './constants'
 import { buildInjectedConnector } from './injected'
@@ -59,7 +59,7 @@ export const switchNetwork = async (chainId: ChainId, connectionType: Connection
   }
 
   const chainInfo = CHAIN_INFO[chainId]
-  const addChainParameter: AddEthereumChainParameter = {
+  const addChainParameter: AddEthereumChainParamete = {
     chainId,
     chainName: chainInfo.label,
     rpcUrls: [chainInfo.rpcUrl],

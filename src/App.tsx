@@ -6,13 +6,12 @@ import { SwitchChains } from './lib/components/SwitchChains'
 import { TokenSwapper } from './lib/components/TokenSwapper'
 
 function App() {
-  const { chainId, account, isActive } = useWeb3React()
+  const { chainId, account } = useWeb3React()
   const { setConnectionType, connectionType } = useConnectionStore(state => state)
   return (
     <div>
       <ConnectionOptions
         activeConnectionType={connectionType}
-        isConnectionActive={isActive}
         onActivate={setConnectionType}
         onDeactivate={setConnectionType}
       />
