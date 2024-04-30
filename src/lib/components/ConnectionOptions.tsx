@@ -5,14 +5,12 @@ import { Option } from './Option'
 
 type ConnectOptionsParams = {
 	activeConnectionType: ConnectionType | null
-	isConnectionActive: boolean
 	onActivate: (connectionType: ConnectionType) => void
 	onDeactivate: (connectionType: null) => void
 }
 
 export const ConnectionOptions = ({
 	activeConnectionType,
-	isConnectionActive,
 	onActivate,
 	onDeactivate,
 }: ConnectOptionsParams) => {
