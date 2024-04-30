@@ -1,6 +1,7 @@
 import { Web3ReactHooks } from '@web3-react/core'
-import { Connector } from '@web3-react/types'
+import { AddEthereumChainParameter, Connector } from '@web3-react/types'
 
+import { ChainId, CHAIN_INFO } from './constants'
 import { buildInjectedConnector } from './injected'
 import { buildWalletConnectConnector } from './wallet-connect'
 
@@ -44,6 +45,30 @@ export function getConnection(c: Connector | ConnectionType) {
     }
   }
 }
+
+export const switchNetwork = async (chainId: ChainId, connectionType: ConnectionType | null) => {
+  if (!connectionType) {
+    return
+  }
+
+  const { connector } = getConnection(connectionType)
+
+  if (connectionType === ConnectionType.WALLET_CONNECT) {
+    await connector.activate(chainId)
+    return
+  }
+
+  const chainInfo = CHAIN_INFO[chainId]
+  const addChainParameter: AddEthereumChainParameter = {
+    chainId,
+    chainName: chainInfo.label,
+    rpcUrls: [chainInfo.rpcUrl],
+    nativeCurrency: chainInfo.nativeCurrency,
+    blockExplorerUrls: [chainInfo.explorer],
+  }
+  await connector.activate(addChainParameter)
+}
+
 
 export const tryActivateConnector = async (connector: Connector): Promise<ConnectionType | undefined> => {
   await connector.activate()
