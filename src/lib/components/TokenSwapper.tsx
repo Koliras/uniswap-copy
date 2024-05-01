@@ -5,6 +5,7 @@ import Button from '@mui/material/Button'
 import { useTokensStore } from "../stores/tokensStore"
 import { useTokenBalance } from "../hooks/useTokenBalance"
 import { Typography } from "@mui/material"
+import { useTokenAllowance } from "../hooks/useTokenAllowance"
 
 export const TokenSwapper = () => {
 	const {
@@ -15,10 +16,17 @@ export const TokenSwapper = () => {
 		flipTokens,
 	} = useTokensStore(state => state);
 
-	const { data, isLoading } = useTokenBalance(tokenIn)
+	const { data: balance, isLoading } = useTokenBalance(tokenIn)
+	const { data: allowance, isLoading: isAllowanceLoading } = useTokenAllowance(tokenIn)
 
 	return (
 		<div>
+			<p>{!tokenIn
+				? "No token chosen"
+				: isAllowanceLoading
+					? "Loading allowance"
+					: `Allowance is: ${allowance}`}
+			</p>
 			<Button
 				onClick={flipTokens}
 			>
@@ -39,7 +47,7 @@ export const TokenSwapper = () => {
 								? "Choose a token"
 								: isLoading
 									? "Loading"
-									: `Balance: ${data}`}
+									: `Balance: ${balance}`}
 							</Typography>
 						</InputAdornment>
 					)
