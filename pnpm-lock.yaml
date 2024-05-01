@@ -44,14 +44,8 @@ dependencies:
   '@web3-react/walletconnect-v2':
     specifier: ^8.5.1
     version: 8.5.1(@types/react@18.2.79)(react@18.2.0)
-  Quoter.json:
-    specifier: link:@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json
-    version: link:@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json
-  contracts:
-    specifier: link:@uniswap/v3-periphery/artifacts/contracts
-    version: link:@uniswap/v3-periphery/artifacts/contracts
   ethers:
-    specifier: '5'
+    specifier: ^5.7.2
     version: 5.7.2
   react:
     specifier: ^18.2.0
