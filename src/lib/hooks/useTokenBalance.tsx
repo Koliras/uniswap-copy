@@ -10,11 +10,14 @@ export function useTokenBalance(token: Token | null) {
     const { data, isLoading } = useQuery({
         queryKey: [token?.address],
         queryFn: async () => {
+            if (!token || !provider || !account) {
+                throw new Error("No token, provider or account was provided to useTokenBalance")
+            }
+
             if (
                 token?.symbol ===
                 CHAIN_INFO[chainId as ChainId].nativeCurrency.symbol
             ) {
-                console.log(token.symbol)
                 return provider?.getBalance(account || '')
             } else {
                 const contract = new ethers.Contract(

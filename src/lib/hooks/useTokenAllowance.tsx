@@ -10,14 +10,21 @@ export function useTokenAllowance(token: Token | null) {
     const { data, isLoading } = useQuery({
         queryKey: [token?.address],
         queryFn: async () => {
+            if (!token) {
+                throw new Error("No token provided in useTokenBalance")
+            }
+
             const contract = new ethers.Contract(
-                token?.address.toLowerCase() || '',
+                token.address.toLowerCase(),
                 Abi,
                 provider
             )
 
             return contract.allowance(account)
         },
+        enabled: !!token && !!provider && !!account,
+        gcTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 5,
     })
     return { data, isLoading }
 }
