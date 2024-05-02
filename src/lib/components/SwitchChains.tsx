@@ -16,7 +16,10 @@ export const SwitchChains = ({ connectionType }: Props) => {
     return (
         <div>
             {Object.entries(CHAIN_INFO).map(([chainId, chainInfo]) => (
-                <button onClick={() => handleClick(parseInt(chainId))}>
+                <button
+                    onClick={() => handleClick(parseInt(chainId))}
+                    key={chainId}
+                >
                     Switch to {chainInfo.label}
                 </button>
             ))}
