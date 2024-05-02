@@ -1,13 +1,15 @@
-import './App.css'
-import { ConnectionOptions } from './lib/components/ConnectionOptions'
-import { useWeb3React } from '@web3-react/core'
-import { useConnectionStore } from './lib/stores/connectionStore'
-import { SwitchChains } from './lib/components/SwitchChains'
-import { TokenSwapper } from './lib/components/TokenSwapper'
+import "./App.css";
+import { ConnectionOptions } from "./lib/components/ConnectionOptions";
+import { useWeb3React } from "@web3-react/core";
+import { useConnectionStore } from "./lib/stores/connectionStore";
+import { SwitchChains } from "./lib/components/SwitchChains";
+import { TokenSwapper } from "./lib/components/TokenSwapper";
 
 function App() {
-  const { chainId, account } = useWeb3React()
-  const { setConnectionType, connectionType } = useConnectionStore(state => state)
+  const { chainId, account } = useWeb3React();
+  const { setConnectionType, connectionType } = useConnectionStore(
+    (state) => state,
+  );
   return (
     <div>
       <ConnectionOptions
@@ -21,7 +23,7 @@ function App() {
       <SwitchChains connectionType={connectionType} />
       <TokenSwapper />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
