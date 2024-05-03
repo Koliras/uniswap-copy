@@ -7,6 +7,8 @@ interface TokensState {
     tokenOut: Token | null
     setTokenOut: (newToken: Token | null) => void
     flipTokens: () => void
+    tokenInAmount: number,
+    setTokenInAmount: (n: number) => void
 }
 
 export const useTokensStore = create<TokensState>()((set) => ({
@@ -16,4 +18,6 @@ export const useTokensStore = create<TokensState>()((set) => ({
     setTokenOut: (newToken: Token | null) => set({ tokenOut: newToken }),
     flipTokens: () =>
         set((prev) => ({ tokenIn: prev.tokenOut, tokenOut: prev.tokenIn })),
+    tokenInAmount: 0,
+    setTokenInAmount: (newTokenAmount: number) => set({ tokenInAmount: newTokenAmount }),
 }))

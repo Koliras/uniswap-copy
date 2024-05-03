@@ -6,10 +6,40 @@ import { useTokenBalance } from '../hooks/useTokenBalance'
 import { Typography } from '@mui/material'
 import { useTokenAllowance } from '../hooks/useTokenAllowance'
 import { useTokensStore } from '../stores/tokensStore'
+import { useTokenOutAmount } from '../hooks/useTokenOutAmount'
+
+const removeArrowsStyle = {
+    '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+        display: 'none',
+    },
+    '& input[type=number]': {
+        MozAppearance: 'textfield',
+    },
+}
 
 export const TokenSwapper = () => {
-    const { tokenIn, setTokenIn, tokenOut, setTokenOut, flipTokens } =
-        useTokensStore((state) => state)
+    const {
+        tokenIn,
+        setTokenIn,
+        tokenOut,
+        setTokenOut,
+        flipTokens,
+        setTokenInAmount,
+        tokenInAmount,
+    } = useTokensStore((state) => state)
+
+    const handleTokenInAmountChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setTokenInAmount(parseFloat(e.target.value))
+    }
+
+    const {
+        data,
+        isLoading: isAmountLoading,
+        isError,
+        error,
+    } = useTokenOutAmount()
 
     const { data: balance, isLoading } = useTokenBalance(tokenIn)
     const { data: allowance, isLoading: isAllowanceLoading } =
@@ -27,7 +57,10 @@ export const TokenSwapper = () => {
             <Button onClick={flipTokens}>Flip Tokens</Button>
             <br />
             <TextField
-                type="text"
+                type="number"
+                sx={removeArrowsStyle}
+                value={tokenInAmount}
+                onChange={handleTokenInAmountChange}
                 inputMode="numeric"
                 InputProps={{
                     endAdornment: (
@@ -55,8 +88,11 @@ export const TokenSwapper = () => {
                 }}
             />
             <br />
+            <h3>{isAmountLoading ? 'Loading' : data}</h3>
+            <h3>{isError && error?.message}</h3>
             <TextField
-                type="text"
+                type="number"
+                sx={removeArrowsStyle}
                 inputMode="numeric"
                 InputProps={{
                     endAdornment: (
